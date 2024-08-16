@@ -1,5 +1,19 @@
+import WelcomeCard from "@/components/Auth/WelcomeCard";
+import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
-export default function Home() {
-  redirect("/bestellen");
+export default async function Page() {
+  const supabase = createClient()
+
+  const { data } = await supabase.auth.getUser()
+
+  if(data.user) {
+    redirect("/bestellen")
+  }
+
+  return (
+    <div className="flex justify-center p-4 md:py-10">
+        <WelcomeCard />
+    </div>
+  )
 }

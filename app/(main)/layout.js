@@ -9,7 +9,7 @@ export default async function Layout({ children }) {
   const { data, error } = await supabase.auth.getUser()
 
   if(error || !data?.user) {
-    redirect("/inloggen")
+    redirect("/")
   }
 
   return (
